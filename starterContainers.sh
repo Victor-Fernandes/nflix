@@ -5,4 +5,4 @@ for i in "${containers[@]}";
 do
 	sudo docker start $i
 done
-sudo docker ps -a
+sudo docker ps
