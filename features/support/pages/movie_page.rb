@@ -39,8 +39,13 @@ class MoviePage
 
         find("textarea[name=overview]").set movie["overview"]
 
-       upload(movie["cover"])
+        upload(movie["cover"])
 
-        click_button "Cadastrar"
+        find("#create-movie").click
+    end
+
+    def movie_tr(movie)
+        #validando pela linha da tabele, para confirma cadastro do filme
+        find("table tbody tr", text: movie["title"])
     end
 end
