@@ -25,21 +25,32 @@ class MoviePage
         end
     end
 
+    def alert
+        find(".alert").text
+    end
+
+    def selec_status(status)
+        # combobox - customizado com Lis
+        find("input[placeholder=Status]").click
+        find(".el-select-dropdown__item", text: status).click
+    end
+
     def create(movie)
         find("input[name=title]").set movie["title"]
 
-        # combobox - customizado com Lis
-        find("input[placeholder=Status]").click
-        find(".el-select-dropdown__item", text: movie["status"]).click
+        #se status for null não é executada
+        selec_status(movie["status"]) unless movie["status"].empty?
         
+        #se year for null não é executada
         find("input[name=year]").set movie["year"]
-        find("input[name=release_date]").set movie["release_date"]
 
+        find("input[name=release_date]").set movie["release_date"]
         add_cast(movie["cast"])
 
         find("textarea[name=overview]").set movie["overview"]
 
-        upload(movie["cover"])
+        #se cover for null não é executada
+        upload(movie["cover"]) unless movie["cover"].empty?
 
         find("#create-movie").click
     end
@@ -48,4 +59,5 @@ class MoviePage
         #validando pela linha da tabele, para confirma cadastro do filme
         find("table tbody tr", text: movie["title"])
     end
+
 end
