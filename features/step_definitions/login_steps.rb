@@ -5,7 +5,6 @@ end
 
 Então('devo ser autenticado') do
   expect(getToken.length).to be 147 # validando pelo qtd d strings do token
-  # OBS:não funciona no chrome.
 end
 
 Então('devo ver {string} na área logada') do |expect_name|
