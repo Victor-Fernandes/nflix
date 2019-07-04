@@ -1,4 +1,5 @@
 Dado("que {string} é um novo filme") do |movie_code|
+    #pegando o arquivo yaml onde fica a massa de testes
     file = YAML.load_file(File.join(Dir.pwd, "features/support/fixtures/movies.yaml"))
     @movie = file[movie_code]
 end
@@ -6,9 +7,10 @@ end
 Quando("eu faço um cadastro deste filme") do
     @movie_page.add
     @movie_page.create(@movie)
-    sleep 4
 end
   
 Então("deve ver o filme no catalogo") do
-    
+    result = @movie_page.movie_tr(@movie)
+    expect(result).to have_text @movie["title"]
+    expect(result).to have_text @movie["status"]
 end
