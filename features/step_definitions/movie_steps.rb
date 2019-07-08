@@ -2,6 +2,7 @@ Dado("que {string} é um novo filme") do |movie_code|
     #pegando o arquivo yaml onde fica a massa de testes
     file = YAML.load_file(File.join(Dir.pwd, "features/support/fixtures/movies.yaml"))
     @movie = file[movie_code]
+    Database.new.delete_movie(@movie["title"]) #Deletar filme antes de realizar os testes
 end
   
 Quando("eu faço um cadastro deste filme") do
