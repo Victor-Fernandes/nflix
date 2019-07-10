@@ -15,7 +15,7 @@ Quando('eu faço um cadastro deste filme') do
 end
 
 Então('deve ver o filme no catalogo') do
-  result = @movie_page.movie_tr(@movie)
+  result = @movie_page.movie_tr(@movie['title'])
   expect(result).to have_text @movie['title']
   expect(result).to have_text @movie['status']
 end
@@ -25,15 +25,17 @@ Então('devo ver a notificação {string}') do |expect_alert|
   expect(@movie_page.alert).to eql expect_alert
 end
 
-Dado('que {string} está do catálogo') do |movie_code|
+#utilizando dinamic steps para garantir que filme esteja no catalogo
+Dado('que {string} está no catálogo') do |movie_code|
   steps %{ 
     Dado que "#{movie_code}" é um novo filme
     E este filme já existe no catálogo
-  }#utilizando dinamic steps para garantir que filme esteja no catalogo
+  }
 end
 
 Quando('eu solicito a exclusão') do
-  pending # Write code here that turns the phrase above into concrete actions
+  @movie_page.remove(@movie["title"])
+  sleep 5
 end
 
 Quando('eu confirmo a solicitação') do
