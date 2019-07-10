@@ -7,13 +7,13 @@ Funcionalidade: Remover filme
 
     @rm_movie
     Cenário: Confirma exclusão
-        Dado que "dbz" está do catálogo
+        Dado que "dbz" está no catálogo
         Quando eu solicito a exclusão
         E eu confirmo a solicitação
         Então este item deve ser removido do catálogo
 
     Cenário: Cancelar da exclusão
-        Dado que "10 coisas que eu odeio em você" está catálogo
+        Dado que "10 coisas que eu odeio em você" está no catálogo
         Quando eu solicito a exclusão
         Mas cancelo a solicitação
         Então este item deve permanecer no catálogo
