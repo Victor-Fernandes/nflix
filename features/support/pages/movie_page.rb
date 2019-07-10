@@ -55,9 +55,13 @@ class MoviePage
         find("#create-movie").click
     end
 
-    def movie_tr(movie)
+    def movie_tr(title)
         #validando pela linha da tabele, para confirma cadastro do filme
-        find("table tbody tr", text: movie["title"])
+        find("table tbody tr", text: title)
     end
 
+    def remove(title)
+        movie_tr(title).find(".btn-trash").click
+    end
+    
 end
