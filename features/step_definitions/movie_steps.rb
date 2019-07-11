@@ -1,3 +1,4 @@
+
 Dado('que {string} é um novo filme') do |movie_code|
   # pegando o arquivo yaml onde fica a massa de testes
   file = YAML.load_file(File.join(Dir.pwd, 'features/support/fixtures/movies.yaml'))
@@ -11,7 +12,7 @@ end
 
 Quando('eu faço um cadastro deste filme') do
   @movie_page.add
-  @movie_page.create(@movie)
+  @movie_page.form.create(@movie)
 end
 
 Então('deve ver o filme no catalogo') do
@@ -20,17 +21,17 @@ Então('deve ver o filme no catalogo') do
   expect(result).to have_text @movie['status']
 end
 
-# Cadastro sem title
+# Cadastro incompleto
 Então('devo ver a notificação {string}') do |expect_alert|
-  expect(@movie_page.alert).to eql expect_alert
+  expect(@movie_page.form.alert).to eql expect_alert
 end
 
 # utilizando dinamic steps para garantir que filme esteja no catalogo
 Dado('que {string} está no catálogo') do |movie_code|
-  steps %(
+  steps %{
     Dado que "#{movie_code}" é um novo filme
     E este filme já existe no catálogo
-  )
+  }
 end
 
 Quando('eu solicito a exclusão') do
@@ -38,7 +39,7 @@ Quando('eu solicito a exclusão') do
 end
 
 Quando('eu confirmo a solicitação') do
-  @movie_page.swal2_confirm
+  @movie_page.sweet_alert.confirm
 end
 
 Então('este item deve ser removido do catálogo') do
@@ -46,7 +47,7 @@ Então('este item deve ser removido do catálogo') do
 end
 
 Quando('cancelo a solicitação') do
-  @movie_page.swal2_cancel
+  @movie_page.sweet_alert.cancel
 end
 
 Então('este item deve permanecer no catálogo') do
