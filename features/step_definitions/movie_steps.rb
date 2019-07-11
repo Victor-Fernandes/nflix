@@ -25,23 +25,30 @@ Então('devo ver a notificação {string}') do |expect_alert|
   expect(@movie_page.alert).to eql expect_alert
 end
 
-#utilizando dinamic steps para garantir que filme esteja no catalogo
+# utilizando dinamic steps para garantir que filme esteja no catalogo
 Dado('que {string} está no catálogo') do |movie_code|
-  steps %{ 
+  steps %(
     Dado que "#{movie_code}" é um novo filme
     E este filme já existe no catálogo
-  }
+  )
 end
 
 Quando('eu solicito a exclusão') do
-  @movie_page.remove(@movie["title"])
-  sleep 5
+  @movie_page.remove(@movie['title'])
 end
 
 Quando('eu confirmo a solicitação') do
-  pending # Write code here that turns the phrase above into concrete actions
+  @movie_page.swal2_confirm
 end
 
 Então('este item deve ser removido do catálogo') do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@movie_page.has_no_movie(@movie['title'])).to be true
+end
+
+Quando('cancelo a solicitação') do
+  @movie_page.swal2_cancel
+end
+
+Então('este item deve permanecer no catálogo') do
+  expect(@movie_page.has_movie(@movie['title'])).to be true
 end
