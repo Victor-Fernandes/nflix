@@ -40,6 +40,14 @@ dbz:
   cast: []
   overview: ""
   cover: ""
+10_coisas:
+  title: "10 Coisas"
+  status: "Disponível"
+  year: 1999
+  release_date: "10/02/1999"
+  cast: []
+  overview: ""
+  cover: "10Coi.jpg"
 sno_title:
   title: ""
   status: "Disponível"
