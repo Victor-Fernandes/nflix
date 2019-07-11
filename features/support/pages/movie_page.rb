@@ -61,7 +61,24 @@ class MoviePage
     end
 
     def remove(title)
-        movie_tr(title).find(".btn-trash").click
+        movie_tr(title).find(".btn-trash").click       
+    end
+
+    def swal2_confirm
+        find(".swal2-confirm").click
+    end
+
+    def swal2_cancel
+        find(".swal2-cancel").click
+    end
+
+    #validando que foi excluido, return true caso tenha sido excluido
+    def has_no_movie(title)
+        page.has_no_css?("table tbody tr", text: title)
+    end
+
+    def has_movie(title)
+        page.has_css?("table tbody tr", text: title )
     end
     
 end
