@@ -1,0 +1,7 @@
+---
+url: "not defined"
+database: #config db
+  host: '192.168.0.7' 
+  dbname: 'nflix' 
+  user: 'postgres' 
+  password: 'qaninja'
