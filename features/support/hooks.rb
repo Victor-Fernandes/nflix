@@ -7,6 +7,8 @@ Before do
 end
 
 Before("@login") do
+    #carregando login do arquivo de configuração
+    user = CONFIG["users"]["cat_manager"]
     @login_page.go
-    @login_page.login("tony@stark.com", "pwd123")
+    @login_page.login(user["email"], user["pass"])
 end
