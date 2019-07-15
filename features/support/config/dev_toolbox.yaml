@@ -1,0 +1,11 @@
+---
+url: "http://192.168.0.7:8080"
+database: #config 
+  host: '192.168.0.7' 
+  dbname: 'nflix' 
+  user: 'postgres' 
+  password: 'qaninja'
+users:
+  cat_manager: 
+    email: "tony@stark.com"
+    pass: "pwd123"
